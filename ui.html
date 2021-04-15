@@ -1,9 +1,12 @@
 <style>
-  input, button, label, h2 {
+  input,
+  button,
+  label,
+  h2 {
     font-size: 11px;
     font-weight: 500;
     line-height: 16px;
-    font-family: 'Inter', 'Helvetica', 'Arial', sans-serif;
+    font-family: "Inter", "Helvetica", "Arial", sans-serif;
     display: block;
   }
   .group {
@@ -12,19 +15,19 @@
   }
   h2 {
     font-weight: 700;
-    color:rgba(0, 0, 0, 0.8);
+    color: rgba(0, 0, 0, 0.8);
   }
   label {
     font-weight: 400;
-    color:rgba(0, 0, 0, 0.3);
+    color: rgba(0, 0, 0, 0.3);
     padding: 8px 4px;
     width: 100%;
   }
   input {
     font-weight: 400;
     border-radius: 2px;
-    border: solid 1px #E6E6E6;
-    color:rgba(0, 0, 0, 0.8);
+    border: solid 1px #e6e6e6;
+    color: rgba(0, 0, 0, 0.8);
     background: white;
     padding: 7px 3px 7px 7px;
     width: 100%;
@@ -33,7 +36,7 @@
   input:focus {
     border-radius: 2px;
     outline: none;
-    border: solid 2px #18A0FB;
+    border: solid 2px #18a0fb;
     padding: 6px 2px 6px 6px;
   }
   .group-actions {
@@ -44,20 +47,20 @@
     display: inline-block;
     border-radius: 6px;
     padding: 5px 8px;
-    background: #18A0FB;
-    border: solid 2px #18A0FB;
+    background: #18a0fb;
+    border: solid 2px #18a0fb;
     color: white;
     min-width: 72px;
   }
   button:focus {
     border-radius: 6px;
     outline: none;
-    border: solid 2px #116FB0;
+    border: solid 2px #116fb0;
   }
   button.secondary {
     padding: 6px 9px;
     border: solid 1px rgba(0, 0, 0, 0.8);
-    color:rgba(0, 0, 0, 0.8);
+    color: rgba(0, 0, 0, 0.8);
     background: white;
     margin-right: 8px;
   }
@@ -65,26 +68,45 @@
     border-radius: 6px;
     padding: 5px 8px;
     outline: none;
-    border: solid 2px #18A0FB;
+    border: solid 2px #18a0fb;
   }
 </style>
 
-<div class="group"><h2>Create a table</h2>
-<label for="countCols">Number of columns:</label><input id="countCols" type="number" value="3">
-<label for="countRows">Number of rows:</label><input id="countRows" type="number" value="5">
-<div class="group-actions"><button id="cancel" class="secondary">Cancel</button><button id="create">Create</button></div></div>
+<div class="group">
+  <h2>Create a table</h2>
+  <label for="countCols">Number of columns:</label>
+  <input id="countCols" type="number" value="3" />
+  <label for="countRows">Number of rows:</label>
+  <input id="countRows" type="number" value="5" />
+  <label for="inputText">Table input text:</label>
+  <textarea id="inputText" rows="5" cols="23"></textarea>
+  <div class="group-actions">
+    <button id="cancel" class="secondary">Cancel</button>
+    <button id="create">Create</button>
+  </div>
+</div>
+
 <script>
+  document.getElementById("create").onclick = () => {
+    const textbox1 = document.getElementById("countRows");
+    const textbox2 = document.getElementById("countCols");
+    const countRows = parseInt(textbox1.value, 10);
+    const countCols = parseInt(textbox2.value, 10);
+    const inputText = document.getElementById("inputText").value;
+    parent.postMessage(
+      {
+        pluginMessage: {
+          type: "create-table",
+          countRows,
+          countCols,
+          inputText,
+        },
+      },
+      "*"
+    );
+  };
 
-document.getElementById('create').onclick = () => {
-  const textbox1 = document.getElementById('countRows');
-  const textbox2 = document.getElementById('countCols');
-  const countRows = parseInt(textbox1.value, 10);
-  const countCols = parseInt(textbox2.value, 10);
-  parent.postMessage({ pluginMessage: { type: 'create-table', countRows, countCols } }, '*');
-}
-
-document.getElementById('cancel').onclick = () => {
-  parent.postMessage({ pluginMessage: { type: 'cancel' } }, '*')
-}
-
+  document.getElementById("cancel").onclick = () => {
+    parent.postMessage({ pluginMessage: { type: "cancel" } }, "*");
+  };
 </script>
