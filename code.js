@@ -32,7 +32,7 @@ figma.ui.onmessage = (msg) => {
     var _a;
     const cellData = msg.inputText
         .split("\n")
-        .map((row) => row.split("\t"));
+        .map((row) => row.split(/[,\t]/).map((string) => string.trim()));
     if (msg.type === "create-table") {
         const nodes = [];
         const component = figma.createComponent();

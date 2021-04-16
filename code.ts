@@ -27,7 +27,7 @@ figma.ui.onmessage = (msg) => {
 
   const cellData = msg.inputText
     .split("\n")
-    .map((row: string) => row.split("\t"));
+    .map((row: string) => row.split(/[,\t]/).map((string) => string.trim()));
 
   if (msg.type === "create-table") {
     const nodes: SceneNode[] = [];
