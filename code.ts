@@ -5,6 +5,17 @@ const url =
 const desc =
   "I could not find API letting to insert components Documentation Link";
 
+/* const dummyData = {
+  countries: {
+    name: "Countries",
+    data: ["Lithuania", "USA", "Poland"],
+  },
+  fullNames: {
+    name: "Full Names",
+    data: ["Lukas Kairys", "Domas Markevičius"],
+  },
+}; */
+
 // This file holds the main code for the plugins. It has access to the *document*.
 // You can access browser APIs in the <script> tag inside "ui.html" which has a
 // full browser environment (see documentation).
